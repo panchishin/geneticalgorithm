@@ -1,0 +1,17 @@
+{
+  "name": "geneticalgorithm",
+  "version": "0.0.1",
+  "description": "Gentic Algorithm",
+  "main": "/src/index.js",
+  "scripts": {
+    "test": "echo 'NO TEST DEFINED'"
+  },
+  "keywords": [
+    "genetic",
+    "algorithm",
+    "genetic algorithm",
+    "geneticalgorithm",
+    "evolve"
+  ],
+  "license": "Unlicense"
+}
