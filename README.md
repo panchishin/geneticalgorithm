@@ -3,6 +3,8 @@
 Classic implementation of Genetic Algorithm
 
 # *BETA*
+
+[![Join the chat at https://gitter.im/panchishin/geneticalgorithm](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Note : althought this code is fairly well tested, expect some of the API to change in upcoming releases.  Specifically, the call to *.evolve* is planned to move to an asynchronous and non-blocking version.
 
 # Usage
