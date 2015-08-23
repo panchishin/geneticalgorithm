@@ -2,7 +2,7 @@
   "name": "geneticalgorithm",
   "version": "0.0.1",
   "description": "Gentic Algorithm",
-  "main": "/src/index.js",
+  "main": "geneticalgorithm.js"
   "scripts": {
     "test": "echo 'NO TEST DEFINED'"
   },
