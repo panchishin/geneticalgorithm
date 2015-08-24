@@ -161,5 +161,3 @@ node example/fixedNumberArray.js 30
 [npm-url]: https://npmjs.org/package/geneticalgorithm
 [npm-image]: http://img.shields.io/npm/v/geneticalgorithm.svg
 [downloads-image]: http://img.shields.io/npm/dm/geneticalgorithm.svg
-
-https://gitter.im/panchishin/geneticalgorithm
