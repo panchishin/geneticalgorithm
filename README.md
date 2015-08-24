@@ -104,8 +104,9 @@ function mutationFunction (oldPhenotype) {
 	return resultPhenotype
 }
 ```
+It must return a phenotype
 
-### crossoverFunction : function(PhenotypeA,PhenoTypeB)
+### crossoverFunction (PhenotypeA,PhenoTypeB)
 The crossover function that you provide.  It is a synchronous function that swaps random sections between two phenotypes.  Construct it like so:
 ```js
 function crossoverFunction(phenotypeA,phenoTypeB) {
@@ -114,8 +115,9 @@ function crossoverFunction(phenotypeA,phenoTypeB) {
 	return [result1,result2]
 }
 ```
+It must return a list of two phenotypes.
 
-###  fitnessFunction : function(phenotype) { 0 },
+###  fitnessFunction (phenotype)
 ```js
 function fitnessFunction(phenotype) {
 	var fitness = 0
@@ -124,6 +126,7 @@ function fitnessFunction(phenotype) {
 	return fitness;
 }
 ```
+It must return a number.
 
 ## Phenotype
 What is a phenotype?  Any json object you want.  GeneticAlgorithm doesn't care.  Chose something that works well for your particular problem and your helper functions: mutation, crossover, and fitness.  A phenotype could be a list of numbers, a dictionary of words, or a matric of boolean values.  It must be a json object though.
