@@ -135,13 +135,24 @@ If you have installed this as a npm dependency first change directory to *node_m
 ## Fixed Number Array
 Execute the *Fixed Number Array* example.  This example shows how to use the basic configurations.  It starts with one array of zeros.  The objective is to evolve the array of zeros to an array of 50's. Run the example using the command line like so:
 
-```bash
+```
 # use the default of 10 numbers in the number array
 node example/fixedNumberArray.js
 
 # change the array to be 30 numbers long
 node example/fixedNumberArray.js 30
 ```
+
+## Variable Number Array
+This is similar to the Fixed Number Array.  The key difference is that the number array can mutate to be longer or shorter.  It starts as the list [0,0,0].  The objective is to evolve the array to the target size with all values equal to 50.  This is a great example if you are searching for a list of values but you also don't know how long the list needs to be.  Run the example using the command line like so:
+```
+# use the default of 5 as the target length
+node examples/variableNumberArray.js
+
+# use 15 as the target length
+node examples/variableNumberArray.js 15
+```
+
 
 # FAQ
 **What is a phenotype?**  A phenotype is a fancy name for the thing you want to evolve.  Perhaps it is a list of numbers or a configuration file or a micro-instruction language.  The key is that it is a json object and is the thing you want to evolve.  It is just data.  If it was called 'the data' instead of phenotype then it would get confusing when we want to talk about other data besides the thing we are trying to evolve.  The name phenotype comes from evolution.  If you are interested in that sort of thing Wikipedia has a great write up.
