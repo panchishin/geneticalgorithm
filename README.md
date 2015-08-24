@@ -2,9 +2,6 @@
 
 Classic implementation of Genetic Algorithm
 
-# *BETA*
-Note : althought this code is fairly well tested, expect some of the API to change in upcoming releases.  Specifically, the call to *.evolve* is planned to move to an asynchronous and non-blocking version.
-
 # Usage
 
 ## GeneticAlgorithm construction and configuration
