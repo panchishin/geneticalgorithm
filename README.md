@@ -1,4 +1,4 @@
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Auto Test Status][travis-image]][travis-url] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![license][license-image]][license-url] [![Auto Test Status][travis-image]][travis-url] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 # Usage
 
@@ -172,3 +172,7 @@ node examples/variableNumberArray.js 15
 
 [travis-url]: https://travis-ci.org/panchishin/geneticalgorithm
 [travis-image]: http://img.shields.io/travis/panchishin/geneticalgorithm.svg
+
+[license-image]: https://img.shields.io/badge/license-Unlicense-green.svg
+[license-url]: https://tldrlegal.com/license/unlicense
+
