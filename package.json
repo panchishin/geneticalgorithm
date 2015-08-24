@@ -1,10 +1,14 @@
 {
   "name": "geneticalgorithm",
-  "version": "0.0.5",
-  "description": "Gentic Algorithm",
+  "version": "0.0.6",
+  "description": "A generic implementation of the classic Gentic Algorithm.",
   "main": "geneticalgorithm.js",
   "scripts": {
     "test": "echo 'NO TEST DEFINED'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/panchishin/geneticalgorithm.git"
   },
   "keywords": [
     "genetic",
@@ -13,5 +17,7 @@
     "geneticalgorithm",
     "evolve"
   ],
-  "license": "Unlicense"
+  "author": "Anton Panchishin",
+  "license": "Unlicense",
+  "homepage": "https://github.com/panchishin/geneticalgorithm"
 }
