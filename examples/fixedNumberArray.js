@@ -1,4 +1,4 @@
-var GeneticAlgorithm = require('../GeneticAlgorithm');
+var GeneticAlgorithm = require('../geneticalgorithm');
 
 if ( !process.argv[2] ) { console.log("No argument found.  Using default of 10 as the Phenotype size.") }
 var PhenotypeSize = process.argv[2] || 10;
