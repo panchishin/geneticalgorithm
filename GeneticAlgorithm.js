@@ -141,7 +141,7 @@ module.exports = function GeneticAlgorithm(options) {
         population : function() {
             return settings.population;
         },
-        settings : function() {
+        config : function() {
             return cloneJSON( settings )
         },
         clone : function(options) {
