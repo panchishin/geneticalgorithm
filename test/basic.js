@@ -1,5 +1,5 @@
 
-var geneticAlgorithmConstructor = require("../geneticalgorithm.js");
+var geneticAlgorithmConstructor = require("../index.js")
 
 module.exports = {
 
