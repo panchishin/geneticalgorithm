@@ -135,6 +135,12 @@ What is a phenotype?  Any json object you want.  GeneticAlgorithm doesn't care. 
 # Example
 If you have installed this as a npm dependency first change directory to *node_modules/geneticalgorithm/*.
 
+## Template
+The template is a boiler plate of how to get started.  It has a dummy phenotype and all the functions stubbed out.  Execute it like so:
+```
+node examples/template.js 
+```
+
 ## Fixed Number Array
 Execute the *Fixed Number Array* example.  This example shows how to use the basic configurations.  It starts with one array of zeros.  The objective is to evolve the array of zeros to an array of 50's. Run the example using the command line like so:
 
