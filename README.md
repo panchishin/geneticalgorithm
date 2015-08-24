@@ -1,7 +1,5 @@
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Auto Test Status][travis-image]][travis-url] 
 
-a configurable and generic implementation of the classic Genetic Algorithm
-
 # Usage
 
 ## GeneticAlgorithm construction
