@@ -106,7 +106,9 @@ module.exports = function GeneticAlgorithm(options) {
         settings.population = nextGeneration;
     }
 
-    function swap( ) {
+
+
+    function randomizePopulationOrder( ) {
         for( var index in settings.population ) {
             var otherIndex = Math.floor( Math.random() * settings.population.length )
             var temp = settings.population[otherIndex]
@@ -121,7 +123,7 @@ module.exports = function GeneticAlgorithm(options) {
                 settings = settingWithDefaults(options,settings)
             }
             populate()
-            swap()
+            randomizePopulationOrder()
             crossover()
             mutate()
             calculateFitness()
