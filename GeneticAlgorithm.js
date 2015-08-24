@@ -1,4 +1,4 @@
-module.exports = function GeneticAlgorithm(options) {
+module.exports = function geneticAlgorithmConstructor(options) {
 
     var settingDefaults = {
  
@@ -145,7 +145,7 @@ module.exports = function GeneticAlgorithm(options) {
             return cloneJSON( settings )
         },
         clone : function(options) {
-            return GeneticAlgorithm( settingWithDefaults(options,settings) )
+            return geneticAlgorithmConstructor( settingWithDefaults(options,settings) )
         }
     }
 }

@@ -1,10 +1,13 @@
 {
   "name": "geneticalgorithm",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A generic implementation of the classic Gentic Algorithm.",
   "main": "geneticalgorithm.js",
+  "devDependencies": {
+    "expresso": "0.9.2"
+  },
   "scripts": {
-    "test": "echo 'NO TEST DEFINED'"
+    "test": "expresso test/*"
   },
   "repository": {
     "type": "git",
