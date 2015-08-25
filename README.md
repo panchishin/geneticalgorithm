@@ -171,7 +171,7 @@ node examples/variableNumberArray.js 15
 
 # References
 
-* [Instructor: Patrick Winston from MIT](https://www.youtube.com/watch?v=STjW3eH0Cik)
+* [Instructor: Patrick Winston from MIT](http://www.youtube.com/v/kHyNqSnzP8Y)
 * [Wikipedia entry for Minimax](https://en.wikipedia.org/wiki/Genetic_Algorithm)
 
 
