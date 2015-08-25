@@ -1,6 +1,6 @@
 {
   "name": "geneticalgorithm",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A generic implementation of the classic Gentic Algorithm.",
   "main": "index.js",
   "devDependencies": {
