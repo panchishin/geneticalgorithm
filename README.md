@@ -1,6 +1,12 @@
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![license][license-image]][license-url] [![Auto Test Status][travis-image]][travis-url] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
-*[AlphaBeta](https://www.npmjs.com/package/alphabeta), [GeneticAlgorithm](https://www.npmjs.com/package/geneticalgorithm), and [NeuralNet](https://www.npmjs.com/package/neuralnet) are related npm and github projects.*
+Related Projects : [AlphaBeta](https://www.npmjs.com/package/alphabeta) , [GeneticAlgorithm](https://www.npmjs.com/package/geneticalgorithm) , and [NeuralNet](https://www.npmjs.com/package/neuralnet)
+
+Genetics, aka genes, are the code of life.  Evolution is the process by which improvement is made to the genes of a population by iteratively removing less fit members of a population then replacing them with clones, mutants, and crossovers of the remaining population.  Applied in nature this accounts for all of animal and plant diversity.  Applied in a controlled way different animal and plant populations have been changed by humans to be stronger, faster, calmer, juicer, and better milk producers (just to name a few).
+
+Genetic Algorithms are an attempt to mimic the benefits of Evolution.  This package provides the calculation framework to execute and mimic artificial evolution.  Genetic Algorithms have been used to solve many problems in Engineering and Mathmatics both for fun and profit.
+
+Section Links : [Construction](#geneticalgorithm-construction) , [Execution](#execution) , [Functions](#functions) , and [Examples](#example)
 
 # Usage
 
@@ -21,7 +27,7 @@ var geneticalgorithm = require('geneticalgorithm')( config )
 
 That creates one instance of an GeneticAlgorithm calculator which uses the initial configuration you supply.  All configuration options are optional except *population*.
 
-That is all the configuration you need to get started.  You can skip the next sections on advanced configuration and jump right to [execution](#execution), [evolution](#geneticalgorithmevolve), [functions](#functions) and [examples](#example).
+That is all the configuration you need to get started.  You can skip the next sections on advanced configuration and jump right to [execution](#execution), [functions](#functions) and [examples](#example).
 
 ### complete config
 Here is the complete list of configuration options
@@ -35,6 +41,7 @@ var config = {
 	crossoverProbability : aDecimal, // defaults to 0.25 = 25%
 
 	fitnessFunction : yourFitnessFunction,
+	fitnessProbability : aDecimal, // defaults to 1.00 = 100%
 	fitnessTests : testsPerPhenotypePerEvolution, // defaults to 1
 
 	population : [ phenotype1 , phenotype2 , ... ],

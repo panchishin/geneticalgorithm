@@ -84,13 +84,14 @@ module.exports = {
         ga.evolve();
         var lastScore = ga.best().score;
 
-        for( var i = 0 ; i < 5 ; i++ ) {
-            for( var j = 0 ; j < 5 * PhenotypeSize ; j++ ) ga.evolve()
-            assert.equal( true , ga.best().score > lastScore  , i + " " + j + " " + lastScore)
-            lastScore = ga.best().score
+        for( var i = 0 ; i < 4 && lastScore < 1 ; i++ ) {
+            for( var j = 0 ; j < 4 * 5 * PhenotypeSize ; j++ ) ga.evolve()
+            var bestScore = ga.best().score
+            assert.equal( true , bestScore > lastScore  , i + " " + j + " " + lastScore)
+            lastScore = bestScore
         }
 
-        assert.equal( true , ga.best().score > 0.5 );
+        assert.equal( true , ga.best().score > 1 , "Error : untrue : " + ga.best().score + " > 1");
     }
 }
 

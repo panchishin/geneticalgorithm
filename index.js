@@ -9,6 +9,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
         crossoverProbability : 0.25,
  
         fitnessFunction : function(phenotype) { 0 },
+        fitnessProbablity : 1.0,
         fitnessTests : 1,
  
         population : [],
@@ -25,6 +26,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
         settings.crossoverProbability = settings.crossoverProbability || defaults.crossoverProbability
 
         settings.fitnessFunction = settings.fitnessFunction || defaults.fitnessFunction
+        settings.fitnessProbablity = settings.fitnessProbablity || defaults.fitnessProbablity
         settings.fitnessTests = settings.fitnessTests || defaults.fitnessTests
         if ( settings.fitnessTests <= 0 ) throw "fitnessTests must be greater than 0"
 
@@ -91,16 +93,21 @@ module.exports = function geneticAlgorithmConstructor(options) {
         return JSON.parse ( JSON.stringify ( object ) )
     }
 
+
     function compete( ) {
         var nextGeneration = []
 
-        for( var p in settings.population ) {
+        for( var p = 0 ; p < settings.population.length - 1 ; p+=2 ) {
             var phenotype = settings.population[p];
-            for( var competition = 0 ; competition < settings.fitnessTests ; competition++ ) {
-                var competitor = settings.population[ Math.floor(Math.random() * settings.population.length) ]
-                phenotype = phenotype.score >= competitor.score ? phenotype : competitor
+            var competitor = settings.population[p+1];
+            if ( Math.random() < settings.fitnessProbablity ) {
+                var best = phenotype.score >= competitor.score ? phenotype : competitor
+                nextGeneration.push(best)
+                nextGeneration.push(best)
+            } else {
+                nextGeneration.push(phenotype)
+                nextGeneration.push(competitor)
             }
-            nextGeneration.push(phenotype)
         }
 
         settings.population = nextGeneration;
@@ -127,7 +134,10 @@ module.exports = function geneticAlgorithmConstructor(options) {
             crossover()
             mutate()
             calculateFitness()
-            compete()
+            for( var competition = 0 ; competition < settings.fitnessTests ; competition++ ) {
+                randomizePopulationOrder()
+                compete()
+            }
         },
         best : function() {
             var best = settings.population[0];
