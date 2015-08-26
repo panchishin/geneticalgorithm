@@ -81,17 +81,24 @@ module.exports = {
             population: [ createEmptyPhenotype() ]
         });
 
-        ga.evolve();
-        var lastScore = ga.best().score;
+
+        ga = ga.clone()
+        
+        ga = ga.clone( ga.config() )
+
+        ga.evolve()
+        var lastScore = ga.bestScore()
 
         for( var i = 0 ; i < 4 && lastScore < 1 ; i++ ) {
             for( var j = 0 ; j < 4 * 5 * PhenotypeSize ; j++ ) ga.evolve()
-            var bestScore = ga.best().score
+            var bestScore = ga.bestScore()
             assert.equal( true , bestScore > lastScore  , i + " " + j + " " + lastScore)
             lastScore = bestScore
         }
 
-        assert.equal( true , ga.best().score > 1 , "Error : untrue : " + ga.best().score + " > 1");
+        assert.equal( true , ga.bestScore() > 1 , "Error : untrue : " + ga.bestScore() + " > 1");
+
+
     }
 }
 

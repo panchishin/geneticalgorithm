@@ -98,6 +98,29 @@ Retrieve the Phenotype with the highest fitness score like so
 var best = geneticalgorithm.best()
 ```
 
+### geneticalgorithm.bestScore()
+Retrieve the score of the best Phenotype like so
+```js
+var best = geneticalgorithm.bestScore()
+```
+
+### geneticalgorithm.population()
+Retrieve the whole population like so
+```js
+var phenotypeList = geneticalgorithm.population()
+```
+
+### geneticalgorithm.scoredPopulation()
+Retrieve the whole population wrapped in a score object like so
+```js
+var scoreList = geneticalgorithm.scoredPopulation()
+console.log( scoreList[0].phenotype )
+console.log( scoreList[0].score )
+```
+The result of *.scoredPopulation* is the following data structure
+```js
+result = { phenotype : anItem , score : aNumber }
+```
 
 ## Functions
 This is the specification of the configuration functions you pass to GeneticAlgorithm
