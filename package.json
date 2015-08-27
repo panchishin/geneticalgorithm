@@ -7,7 +7,7 @@
     "expresso": "0.9.2"
   },
   "scripts": {
-    "test": "expresso test/basic.js"
+    "test": "expresso test/*"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "algorithm",
     "genetic algorithm",
     "geneticalgorithm",
+    "artificial evolution",
     "evolve"
   ],
   "author": "Anton Panchishin",
