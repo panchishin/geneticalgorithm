@@ -1,4 +1,4 @@
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![license][license-image]][license-url] [![Auto Test Status][travis-image]][travis-url] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+[![NPM version][npm-image]][npm-url] [![license][license-image]][license-url] [![Downloads][downloads-image]][npm-url] [![Auto Test Status][travis-image]][travis-url] [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/panchishin/geneticalgorithm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 Genetics, aka genes, are the code of life.  Evolution is the process by which improvement is made to the genes of a population by iteratively removing less fit members of a population then replacing them with clones, mutants, and crossovers of the remaining population.  Applied in nature this accounts for all of animal and plant diversity.  Applied in a controlled way different animal and plant populations have been changed by humans to be stronger, faster, calmer, juicer, and better milk producers (just to name a few).
 
@@ -34,6 +34,7 @@ Here is the complete list of configuration options
 
 ```js
 var config = {
+
 	mutationFunction : aMutationFunctionYouSupply,
 	mutationProbability : aDecimal,  // defaults to 0.25 = 25%
 
@@ -46,6 +47,7 @@ var config = {
 
 	population : [ phenotype1 , phenotype2 , ... ],
 	populationSize : aNumber // defaults to 100
+
 }
 var GeneticAlgorithmConstructor = require('geneticalgorithm')
 var geneticalgorithm = GeneticAlgorithmConstructor( config )
@@ -193,6 +195,13 @@ node examples/variableNumberArray.js
 # use 15 as the target length
 node examples/variableNumberArray.js 15
 ```
+
+### Islands
+One issue that arrises is when there are local maxima and the genetic algorithm gets stuck on it and does not explore and find the global maxima.  In this example there are 25 local maxima but only one global maxima.  One phenotype starts near the worst local maxima and after a few generations the genetic algorithm is able to find the global maxima.
+```
+node examples/islandHop.js
+```
+
 # Phenotype
 What is a phenotype?  Any json object you want.  GeneticAlgorithm doesn't care.  Chose something that works well for your particular problem and your helper functions: mutation, crossover, and fitness.  A phenotype could be a list of numbers, a dictionary of words, or a matric of boolean values.  It must be a json object though.
 
