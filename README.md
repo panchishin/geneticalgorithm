@@ -215,6 +215,7 @@ This is part of a set of related projects.
 
 * [AlphaBeta](https://www.npmjs.com/package/alphabeta)
 * [GeneticAlgorithm](https://www.npmjs.com/package/geneticalgorithm)
+* [NearestNeighbour](https://www.npmjs.com/package/nearestneighbour)
 * [NeuralNet](https://www.npmjs.com/package/neuralnet)
 
 # References
