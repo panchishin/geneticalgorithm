@@ -214,6 +214,7 @@ What is a phenotype?  Any json object you want.  GeneticAlgorithm doesn't care. 
 This is part of a set of related projects.
 
 * [AlphaBeta](https://www.npmjs.com/package/alphabeta)
+* [Boosting](https://www.npmjs.com/package/boosting)
 * [GeneticAlgorithm](https://www.npmjs.com/package/geneticalgorithm)
 * [NearestNeighbour](https://www.npmjs.com/package/nearestneighbour)
 * [NeuralNet](https://www.npmjs.com/package/neuralnet)
