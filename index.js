@@ -11,6 +11,8 @@ module.exports = function geneticAlgorithmConstructor(options) {
         fitnessFunction : function(phenotype) { 0 },
         fitnessProbablity : 1.0,
         fitnessTests : 1,
+
+        diversityFunction : function(a,b) { return 0 },
  
         population : [],
         populationSize : 100,
@@ -28,10 +30,12 @@ module.exports = function geneticAlgorithmConstructor(options) {
         settings.fitnessFunction = settings.fitnessFunction || defaults.fitnessFunction
         settings.fitnessProbablity = settings.fitnessProbablity || defaults.fitnessProbablity
         settings.fitnessTests = settings.fitnessTests || defaults.fitnessTests
-        if ( settings.fitnessTests <= 0 ) throw "fitnessTests must be greater than 0"
+        if ( settings.fitnessTests <= 0 ) throw Error("fitnessTests must be greater than 0")
+
+        settings.diversityFunction = settings.diversityFunction || defaults.diversityFunction
 
         settings.population = settings.population || defaults.population
-        if ( settings.population.length <= 0 ) throw "population must be an array and contain at least 1 phenotypes"
+        if ( settings.population.length <= 0 ) throw Error("population must be an array and contain at least 1 phenotypes")
 
         settings.scoredPopulation = []
         for( var index in settings.population ) {
@@ -41,7 +45,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
         }
 
         settings.populationSize = settings.populationSize || defaults.populationSize
-        if ( settings.populationSize <= 0 ) throw "populationSize must be greater than 0"
+        if ( settings.populationSize <= 0 ) throw Error("populationSize must be greater than 0")
 
         return settings
     }
@@ -157,9 +161,10 @@ module.exports = function geneticAlgorithmConstructor(options) {
             settings.population = []
             delete settings.best
 
-            if ( options) { 
+            if ( options ) { 
                 settings = settingWithDefaults(options,settings)
             }
+            
             populate()
             randomizePopulationOrder()
             crossover()
