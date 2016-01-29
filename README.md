@@ -16,10 +16,11 @@ The minimal configuration for constructing an GeneticAlgorithm calculator is lik
 
 ```js
 var config = {
-    mutationFunction: mutationFunction,
-    crossoverFunction: crossoverFunction,
-    fitnessFunction: fitnessFunction,
-    population: [ /* one or more phenotypes */ ]
+    mutationFunction: aMutationFunctionYouSupply,
+    crossoverFunction: yourCrossoverFunction,
+    fitnessFunction: yourFitnessFunction,
+    population: [ /* one or more phenotypes */ ],
+    populationSize: aDecimalNumberGreaterThanZero 	// defaults to 100
 }
 var GeneticAlgorithmConstructor = require('geneticalgorithm')
 var geneticalgorithm = GeneticAlgorithmConstructor( config )
@@ -29,26 +30,6 @@ That creates one instance of an GeneticAlgorithm calculator which uses the initi
 
 That is all the configuration you need to get started.  You can skip the next sections on advanced configuration and jump right to [execution](#execution), [functions](#functions) and [examples](#example).
 
-### complete config
-Here is the complete list of configuration options
-
-```js
-var config = {
-
-	mutationFunction : aMutationFunctionYouSupply,
-	crossoverFunction : yourCrossoverFunction,
-
-	fitnessFunction : yourFitnessFunction,
-	fitnessProbability : theChanceOfATestPerPhenotypePerEvolution, // defaults to 1.00 = 100%
-	fitnessTests : testsPerPhenotypePerEvolution, // defaults to 1
-
-	population : [ phenotype1 , phenotype2 , ... ],
-	populationSize : aNumber // defaults to 100
-
-}
-var GeneticAlgorithmConstructor = require('geneticalgorithm')
-var geneticalgorithm = GeneticAlgorithmConstructor( config )
-```
 
 ### geneticalgorithm.clone( )
 Create another GeneticAlgorithm calculator based off of an existing configuration.

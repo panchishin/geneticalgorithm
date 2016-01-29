@@ -7,8 +7,6 @@ module.exports = function geneticAlgorithmConstructor(options) {
         crossoverFunction : function(a,b) { return [a,b] },
  
         fitnessFunction : function(phenotype) { return 0 },
-        fitnessProbablity : 1.0,
-        fitnessTests : 1,
 
         diversityFunction : function(a,b) { return 0 },
  
@@ -22,9 +20,6 @@ module.exports = function geneticAlgorithmConstructor(options) {
         settings.mutationFunction = settings.mutationFunction || defaults.mutationFunction
         settings.crossoverFunction = settings.crossoverFunction || defaults.crossoverFunction
         settings.fitnessFunction = settings.fitnessFunction || defaults.fitnessFunction
-        settings.fitnessProbablity = settings.fitnessProbablity || defaults.fitnessProbablity
-        settings.fitnessTests = settings.fitnessTests || defaults.fitnessTests
-        if ( settings.fitnessTests <= 0 ) throw Error("fitnessTests must be greater than 0")
 
         settings.diversityFunction = settings.diversityFunction || defaults.diversityFunction
 
@@ -84,22 +79,17 @@ module.exports = function geneticAlgorithmConstructor(options) {
         for( var p = 0 ; p < settings.scoredPopulation.length - 1 ; p+=2 ) {
             var phenotype = settings.scoredPopulation[p];
             var competitor = settings.scoredPopulation[p+1];
-            if ( Math.random() < settings.fitnessProbablity ) {
-                phenotype.score = settings.fitnessFunction(phenotype.phenotype);
-                competitor.score = settings.fitnessFunction(competitor.phenotype);
 
-                var best = phenotype.score >= competitor.score ? phenotype : competitor
-                nextGeneration.push(best)
+            phenotype.score = settings.fitnessFunction(phenotype.phenotype);
+            competitor.score = settings.fitnessFunction(competitor.phenotype);
 
-                if ( Math.random() < 0.5 ) {
-                    nextGeneration.push(mutate(best))
-                } else {
-                    nextGeneration.push(crossover(best))
-                }
+            var best = phenotype.score >= competitor.score ? phenotype : competitor
+            nextGeneration.push(best)
 
+            if ( Math.random() < 0.5 ) {
+                nextGeneration.push(mutate(best))
             } else {
-                nextGeneration.push(phenotype)
-                nextGeneration.push(competitor)
+                nextGeneration.push(crossover(best))
             }
         }
 
@@ -142,10 +132,8 @@ module.exports = function geneticAlgorithmConstructor(options) {
             }
             
             populate()
-            for( var competition = 0 ; competition < settings.fitnessTests ; competition++ ) {
-                randomizePopulationOrder()
-                compete()
-            }
+            randomizePopulationOrder()
+            compete()
             return this
         },
         best : function() {
