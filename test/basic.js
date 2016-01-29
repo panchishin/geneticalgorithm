@@ -45,11 +45,10 @@ module.exports = {
 		    function cloneJSON( item ) {
 		        return JSON.parse ( JSON.stringify ( item ) )
 		    }
-
 		    var x = cloneJSON(a), y = cloneJSON(b), cross = false;
 
-		    for (var i in a.numbers) {
-		        if ( Math.random() * a.numbers.length <= 1 ) { cross = !cross }
+		    for (var i in x.numbers) {
+		        if ( Math.random() * x.numbers.length <= 1 ) { cross = !cross }
 		        if (cross) {
 		            x.numbers[i] = b.numbers[i];
 		            y.numbers[i] = a.numbers[i];

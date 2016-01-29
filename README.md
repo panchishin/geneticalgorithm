@@ -25,7 +25,7 @@ var GeneticAlgorithmConstructor = require('geneticalgorithm')
 var geneticalgorithm = GeneticAlgorithmConstructor( config )
 ```
 
-That creates one instance of an GeneticAlgorithm calculator which uses the initial configuration you supply.  All configuration options are optional except *population*.
+That creates one instance of an GeneticAlgorithm calculator which uses the initial configuration you supply.  All configuration options are optional except *population*.  If you don't specify a crossover function then GeneticAlgorithm will only do mutations and similarly if you don't specify the mutation function it will only do crossovers.  If you don't specify either then no evolution will happen, go figure.
 
 That is all the configuration you need to get started.  You can skip the next sections on advanced configuration and jump right to [execution](#execution), [functions](#functions) and [examples](#example).
 
@@ -36,13 +36,10 @@ Here is the complete list of configuration options
 var config = {
 
 	mutationFunction : aMutationFunctionYouSupply,
-	mutationProbability : aDecimal,  // defaults to 0.25 = 25%
-
 	crossoverFunction : yourCrossoverFunction,
-	crossoverProbability : aDecimal, // defaults to 0.25 = 25%
 
 	fitnessFunction : yourFitnessFunction,
-	fitnessProbability : aDecimal, // defaults to 1.00 = 100%
+	fitnessProbability : theChanceOfATestPerPhenotypePerEvolution, // defaults to 1.00 = 100%
 	fitnessTests : testsPerPhenotypePerEvolution, // defaults to 1
 
 	population : [ phenotype1 , phenotype2 , ... ],
@@ -86,6 +83,11 @@ Do one generation of evolution like so
 geneticalgorithm.evolve( )
 ```
 The *.evolve()* moves the calculator ahead by one generation.  Depending on the population size and the speed of the functions you provide in the configuration this coupld be quick or take some time.
+*.evolve()* changes the geneticalgorithm and also returns it.  This is for simplicity so that you could do chain calls like so
+```js
+geneticalgorithm.evolve().evolve().best()
+```
+to do two evolutions and then get the best phenoType (see *.best()* below).
 
 ### geneticalgorithm.evolve( config )
 Same as *.evolve()* but change the configuration prior to running the evolution calculations.  In this example the mutationProbability is changed to 10%:
@@ -142,14 +144,14 @@ function mutationFunction (oldPhenotype) {
 }
 ```
 
-### crossoverFunction (PhenotypeA,PhenoTypeB)
+### crossoverFunction (PhenoTypeA,PhenoTypeB)
 > Must return an array [] with 2 phenotypes
 
 The crossover function that you provide.  It is a synchronous function that swaps random sections between two phenotypes.  Construct it like so:
 ```js
-function crossoverFunction(phenotypeA,phenoTypeB) {
+function crossoverFunction(phenoTypeA,phenoTypeB) {
 	var result1 = {} , result2 = {}
-	// use phenotypeA and B to create phenotype result 1 and 2
+	// use phenoTypeA and B to create phenotype result 1 and 2
 	return [result1,result2]
 }
 ```

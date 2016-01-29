@@ -3,12 +3,10 @@ module.exports = function geneticAlgorithmConstructor(options) {
     function settingDefaults() { return {
  
         mutationFunction : function(phenotype) { return phenotype },
-        mutationProbability : 0.25,
  
         crossoverFunction : function(a,b) { return [a,b] },
-        crossoverProbability : 0.25,
  
-        fitnessFunction : function(phenotype) { 0 },
+        fitnessFunction : function(phenotype) { return 0 },
         fitnessProbablity : 1.0,
         fitnessTests : 1,
 
@@ -22,11 +20,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
         settings = settings || {}
 
         settings.mutationFunction = settings.mutationFunction || defaults.mutationFunction
-        settings.mutationProbability = settings.mutationProbability || defaults.mutationProbability
-
         settings.crossoverFunction = settings.crossoverFunction || defaults.crossoverFunction
-        settings.crossoverProbability = settings.crossoverProbability || defaults.crossoverProbability
-
         settings.fitnessFunction = settings.fitnessFunction || defaults.fitnessFunction
         settings.fitnessProbablity = settings.fitnessProbablity || defaults.fitnessProbablity
         settings.fitnessTests = settings.fitnessTests || defaults.fitnessTests
@@ -68,44 +62,6 @@ module.exports = function geneticAlgorithmConstructor(options) {
         }
     }
 
-    function crossover () {
-        var nextGeneration = []
-        var children;
-        for( var p = 0; p < settings.scoredPopulation.length - 1; p += 2 ) {
-            var parent1 = settings.scoredPopulation[p].phenotype;
-            var parent2 = settings.scoredPopulation[p + 1].phenotype;
-            
-            if (settings.crossoverProbability < Math.random()) {
-                children = settings.crossoverFunction(parent1, parent2);
-            }
-            else {
-                children = [ cloneJSON(parent1),cloneJSON(parent2) ]
-            }
-            nextGeneration.push( { phenotype : children[0] } );
-            nextGeneration.push( { phenotype : children[1] } );
-        }
-        if (nextGeneration.length < settings.scoredPopulation.length) {
-            nextGeneration.push(settings.scoredPopulation[settings.scoredPopulation.length - 1]);
-        }
-        settings.scoredPopulation = nextGeneration;
-    }
-
-    function mutate( ) {
-        var nextGeneration = []
-        for( var index in settings.scoredPopulation ) {
-            if (Math.random() < settings.mutationProbability) {
-                nextGeneration.push(
-                    { phenotype : 
-                        settings.mutationFunction(settings.scoredPopulation[index].phenotype)
-                    }
-                )
-            } else {
-                nextGeneration.push(cloneJSON(settings.scoredPopulation[index]));
-            }
-        }
-        settings.scoredPopulation = nextGeneration;
-    }
-
     function cloneJSON( object ) {
         return JSON.parse ( JSON.stringify ( object ) )
     }
@@ -118,9 +74,25 @@ module.exports = function geneticAlgorithmConstructor(options) {
             var phenotype = settings.scoredPopulation[p];
             var competitor = settings.scoredPopulation[p+1];
             if ( Math.random() < settings.fitnessProbablity ) {
+                phenotype.score = settings.fitnessFunction(phenotype.phenotype);
+                competitor.score = settings.fitnessFunction(competitor.phenotype);
+
                 var best = phenotype.score >= competitor.score ? phenotype : competitor
                 nextGeneration.push(best)
-                nextGeneration.push(best)
+
+                best = cloneJSON(best)
+                if ( Math.random() < 0.5 ) { // TODO change to 0.5
+                    nextGeneration.push({
+                        phenotype : settings.mutationFunction(best.phenotype)
+                    })
+                } else {
+                    var mate = settings.scoredPopulation[ Math.floor(Math.random() * settings.scoredPopulation.length ) ]
+                    mate = cloneJSON(mate)
+                    nextGeneration.push({
+                        phenotype : settings.crossoverFunction(best.phenotype,mate.phenotype)[0]
+                    })
+                }
+
             } else {
                 nextGeneration.push(phenotype)
                 nextGeneration.push(competitor)
@@ -166,16 +138,14 @@ module.exports = function geneticAlgorithmConstructor(options) {
             }
             
             populate()
-            randomizePopulationOrder()
-            crossover()
-            mutate()
-            calculateFitness()
             for( var competition = 0 ; competition < settings.fitnessTests ; competition++ ) {
                 randomizePopulationOrder()
                 compete()
             }
+            return this
         },
         best : function() {
+            calculateFitness()
             setBest()
             return cloneJSON( settings.best.phenotype )
         },
@@ -187,6 +157,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
             return cloneJSON( this.config().population )
         },
         scoredPopulation : function() {
+            calculateFitness()
             return cloneJSON( settings.scoredPopulation )
         },
         config : function() {
