@@ -1,4 +1,4 @@
-[![Issues][issues-image]][issues-url] [![Downloads][downloads-image]][downloads-url] [![Auto Test Status][travis-image]][travis-url] [![license][license-image]][license-url] [![Gitter chat][gitter-image]][gitter-url]
+[![Downloads][downloads-image]][downloads-url] [![Auto Test Status][travis-image]][travis-url] [![license][license-image]][license-url] [![Gitter chat][gitter-image]][gitter-url]
 
 Genetics, aka genes, are the code of life.  Evolution is the process by which improvement is made to the genes of a population by iteratively removing less fit members of a population then replacing them with clones, mutants, and crossovers of the remaining population.  Applied in nature this accounts for all of animal and plant diversity.  Applied in a controlled way different animal and plant populations have been changed by humans to be stronger, faster, calmer, juicer, and better milk producers (just to name a few).
 
@@ -238,9 +238,6 @@ This is part of a set of related projects.
 * [Instructor: Patrick Winston from MIT](http://www.youtube.com/v/kHyNqSnzP8Y)
 * [Wikipedia entry for Minimax](https://en.wikipedia.org/wiki/Genetic_Algorithm)
 
-
-[issues-url]: https://github.com/panchishin/geneticalgorithm/issues
-[issues-image]: https://img.shields.io/github/issues/panchishin/geneticalgorithm.svg
 
 [gitter-url]: https://gitter.im/panchishin/geneticalgorithm
 [gitter-image]: https://badges.gitter.im/panchishin/geneticalgorithm.png
