@@ -19,6 +19,7 @@ var config = {
     mutationFunction: aMutationFunctionYouSupply,
     crossoverFunction: yourCrossoverFunction,
     fitnessFunction: yourFitnessFunction,
+    doesABeatBFunction: yourCompetitionFunction,
     population: [ /* one or more phenotypes */ ],
     populationSize: aDecimalNumberGreaterThanZero 	// defaults to 100
 }
@@ -125,12 +126,12 @@ function mutationFunction (oldPhenotype) {
 }
 ```
 
-### crossoverFunction (PhenoTypeA,PhenoTypeB)
+### crossoverFunction (phenoTypeA, phenoTypeB)
 > Must return an array [] with 2 phenotypes
 
 The crossover function that you provide.  It is a synchronous function that swaps random sections between two phenotypes.  Construct it like so:
 ```js
-function crossoverFunction(phenoTypeA,phenoTypeB) {
+function crossoverFunction(phenoTypeA, phenoTypeB) {
 	var result1 = {} , result2 = {}
 	// use phenoTypeA and B to create phenotype result 1 and 2
 	return [result1,result2]
@@ -146,6 +147,36 @@ function fitnessFunction(phenotype) {
 	// use phenotype and possibly some other information
 	// to determine the fitness number.  Higher is better, lower is worse.
 	return fitness;
+}
+```
+
+### doesABeatBFunction (phenoTypeA, phenoTypeB)
+> Must return truthy or falsy
+
+This function, if specified, overrides using simply the fitness function to compare two phenotypes.  There are situations where you will want to preserve a certain amount of genetic diversity and so your doesABeatBFunction can return false if the two phenotypes are too different.  When GeneticAlgorithm is comparing two phenoTypes it *only* tests if A can beat B and if so then B dies and is replaced with a mutant or crossover child of A.  If A cannot beat B then nothing happens.  This is an important note to consider.  Suppose A and B are very genetically different and you want to preserve diversity then in your *doesABeatBFunction* you would check how diverse A and B are and simply return falsy if it crosses your threshold.
+
+The default implementation if you don't supply one is:
+```js
+function doesABeatBFunction(phenoTypeA, phenoTypeB) {
+	return fitnessFunction(phenoTypeA) >= fitnessFunction(phenoTypeB)
+}
+```
+If you have implemented a *geneticDiversityFunction(phenoTypeA, phenoTypeB)* that returns some numeric value and you've identified that SOME_MINIMUM_SIMILARITY value is necessary for A and B to even be compared otherwise you want to preserve both then your implementation may look something like this
+```js
+function doesABeatBFunction(phenoTypeA, phenoTypeB) {
+
+	// if too genetically similar to consider
+	if ( geneticDiversityFunction(phenoTypeA, phenoTypeB) > SOME_MINIMUM_SIMILARITY ) {
+		return false; 
+
+	// phenoTypeA isn't better than phenoTypeB 
+	} else if ( fitnessFunction(phenoTypeA) < fitnessFunction(phenoTypeB) ) {
+		return false;
+
+	// phenoTypeA beats phenoTypeB
+	} else {
+		return true;
+	}
 }
 ```
 

@@ -94,7 +94,8 @@ module.exports = function geneticAlgorithmConstructor(options) {
 
 
     function randomizePopulationOrder( ) {
-        for( var index in settings.population ) {
+
+        for( var index = 0 ; index < settings.population.length ; index++ ) {
             var otherIndex = Math.floor( Math.random() * settings.population.length )
             var temp = settings.population[otherIndex]
             settings.population[otherIndex] = settings.population[index]
