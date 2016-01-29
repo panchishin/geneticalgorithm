@@ -223,7 +223,6 @@ What is a phenotype?  Any json object you want.  GeneticAlgorithm doesn't care. 
 # FAQ
 **What is a phenotype?**  A phenotype is a fancy name for the thing you want to evolve.  Perhaps it is a list of numbers or a configuration file or a micro-instruction language.  The key is that it is a json object and is the thing you want to evolve.  It is just data.  If it was called 'the data' instead of phenotype then it would get confusing when we want to talk about other data besides the thing we are trying to evolve.  The name phenotype comes from evolution.  If you are interested in that sort of thing Wikipedia has a great write up.
 
-**Why is there a fitnessFunction but not a comparePhenotypesFunction?**  Good question.  I'm looking at adding that to the configuration options and having it be asynchronous, because you may have to run a simulation possibly even on another server to resolve battling phenotypes.  Stay tuned.  If this is something you are looking for please use the Gitter link at the top to tell me about it.
 
 # Related AI Projects
 This is part of a set of related projects.
