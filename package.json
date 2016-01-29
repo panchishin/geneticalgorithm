@@ -1,6 +1,6 @@
 {
   "name": "geneticalgorithm",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "a general purpose genetic algorithm, an A.I. tool useful for machine evolution and adaptation",
   "main": "index.js",
   "devDependencies": {

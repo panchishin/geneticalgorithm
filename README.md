@@ -72,10 +72,10 @@ geneticalgorithm.evolve().evolve().best()
 to do two evolutions and then get the best phenoType (see *.best()* below).
 
 ### geneticalgorithm.evolve( config )
-Same as *.evolve()* but change the configuration prior to running the evolution calculations.  In this example the mutationProbability is changed to 10%:
+Same as *.evolve()* but change the configuration prior to running the evolution calculations.  In this example the populationSize is increased to 200:
 ```js
 geneticalgorithm.evolve( {
-	mutationProbability : 0.1
+	populationSize : 200
 } )
 ```
 
@@ -161,24 +161,25 @@ function doesABeatBFunction(phenoTypeA, phenoTypeB) {
 	return fitnessFunction(phenoTypeA) >= fitnessFunction(phenoTypeB)
 }
 ```
-If you have implemented a *geneticDiversityFunction(phenoTypeA, phenoTypeB)* that returns some numeric value and you've identified that SOME_MINIMUM_SIMILARITY value is necessary for A and B to even be compared otherwise you want to preserve both then your implementation may look something like this
+Imagine you have implemented a *yourDiversityFunc(phenoTypeA, phenoTypeB)* that returns some numeric value and you've identified that some *MINIMUM_SIMILARITY* value is necessary for A and B to even be compared otherwise you want to preserve both.  Your implementation may look something like this
 ```js
 function doesABeatBFunction(phenoTypeA, phenoTypeB) {
 
-	// if too genetically similar to consider
-	if ( geneticDiversityFunction(phenoTypeA, phenoTypeB) > SOME_MINIMUM_SIMILARITY ) {
-		return false; 
+  // if too genetically similar to consider
+  if ( yourDiversityFunc(phenoTypeA, phenoTypeB) > MINIMUM_SIMILARITY ) {
+    return false; 
+  }
 
-	// phenoTypeA isn't better than phenoTypeB 
-	} else if ( fitnessFunction(phenoTypeA) < fitnessFunction(phenoTypeB) ) {
-		return false;
+  // if phenoTypeA isn't better than phenoTypeB 
+  if ( fitnessFunction(phenoTypeA) < fitnessFunction(phenoTypeB) ) {
+    return false;
+  }
 
-	// phenoTypeA beats phenoTypeB
-	} else {
-		return true;
-	}
+  // else phenoTypeA beats phenoTypeB
+  return true;
 }
 ```
+
 
 # Example
 If you have installed this as a npm dependency first change directory to *node_modules/geneticalgorithm/*.
