@@ -50,20 +50,39 @@ var fitnessFunction = function( phenotype ) {
     return -1 * distance
 }
 
-var firstPhenotype = [{x:2,y:2}, {x:5,y:1}, {x:1,y:1}, {x:3,y:1}, {x:4,y:7}, {x:4,y:1}, {x:3,y:3}]
+// outline a large square but not in order.
+var firstPhenotype = []
+for (i=2;i<10;i++) {
+    firstPhenotype.push( {x:i,y:1} )
+    firstPhenotype.push( {x:1,y:i} )
+    firstPhenotype.push( {x:i,y:10} )
+    firstPhenotype.push( {x:10,y:i} )
+}
 
 var geneticAlgorithmConstructor = require('../index')
 var geneticAlgorithm = geneticAlgorithmConstructor({
     mutationFunction: mutationFunction,
     crossoverFunction: crossoverFunction,
     fitnessFunction: fitnessFunction,
-    population: [ firstPhenotype ]
+    population: [ firstPhenotype ],
+    populationSize:1000
 });
 
 console.log("Starting with:")
 console.log( firstPhenotype )
-for( var i = 0 ; i < 100 ; i++ ) geneticAlgorithm.evolve()
-var best = geneticAlgorithm.best()
+var best = []
+var previousBestScore = 0
+for( var a = 0 ; a < 100 ; a++ ) {
+    for( var i = 0 ; i < 25 ; i++ ) geneticAlgorithm.evolve()
+    var score = geneticAlgorithm.bestScore()
+    if ( score == previousBestScore ) {
+        break;
+    }
+    previousBestScore = score
+    console.log("Distance is " + -1 * score)
+    
+}
+best = geneticAlgorithm.best()
 console.log("Finished with:")
 console.log(best)
 console.log("Distance is " + -1 * fitnessFunction(best))
