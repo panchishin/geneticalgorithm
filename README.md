@@ -190,6 +190,13 @@ The template is a boiler plate of how to get started.  It has a dummy phenotype 
 node examples/template.js 
 ```
 
+### Traveling Salesmen
+For a list of XY coordinates, find the order that results in the least distance being traveled.  Run the example like so:
+```
+node example/travelingSalesmen.js
+```
+
+
 ### Fixed Number Array
 Execute the *Fixed Number Array* example.  This example shows how to use the basic configurations.  It starts with one array of zeros.  The objective is to evolve the array of zeros to an array of 50's. Run the example using the command line like so:
 
