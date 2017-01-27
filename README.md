@@ -165,13 +165,13 @@ Imagine you have implemented a *yourDiversityFunc(phenoTypeA, phenoTypeB)* that 
 ```js
 function doesABeatBFunction(phenoTypeA, phenoTypeB) {
 
-  // if too genetically similar to consider
+  // if too genetically different to consider
   if ( yourDiversityFunc(phenoTypeA, phenoTypeB) > MINIMUM_SIMILARITY ) {
     return false; 
   }
 
   // if phenoTypeA isn't better than phenoTypeB 
-  if ( fitnessFunction(phenoTypeA) < fitnessFunction(phenoTypeB) ) {
+  if ( fitnessFunction(phenoTypeA) =< fitnessFunction(phenoTypeB) ) {
     return false;
   }
 
