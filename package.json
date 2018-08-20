@@ -26,5 +26,8 @@
   },
   "license": "Unlicense",
   "homepage": "https://github.com/panchishin/geneticalgorithm",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "npm": "^6.4.0"
+  }
 }
