@@ -4,6 +4,10 @@ Genetics, aka genes, are the code of life.  Evolution is the process by which im
 
 Genetic Algorithms are an attempt to mimic the benefits of Evolution.  This package provides the calculation framework to execute and mimic artificial evolution.  Genetic Algorithms have been used to solve many problems in Engineering and Mathmatics both for fun and profit.
 
+A naive implementation will try and maximize a fitness function by applying mutations and cross-over but fail to implement some diversity metric.  What happens without a diversity metric is that most likely all your phenotypes will clump into one local optimia.  When a diversity metric is added then a few phenotypes are allowed to 'explore' the local solution space without having to compete with the majority of the population that is overfit to a local maxima.  Adding a diversity metric will allow these 'explorers' to avoid competition until they find something even better.
+
+To add diversity use the [doesABeatBFunction](#doesABeatBFunction) function instead of the [fitnessFunction](#fitnessFunction) and only allow A to beat B if A is more fit than B and B is close enough.  See the [Islands](#Islands) example for sample code.
+
 Section Links : [Construction](#construction) , [Execution](#execution) , [Examples](#example) , [Phenotype](#phenotype) , [FAQ](#faq) , [Related](#related-ai-projects) , and [References](#references)
 
 # Construction
