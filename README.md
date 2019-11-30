@@ -1,5 +1,7 @@
 [![Downloads][downloads-image]][downloads-url] [![Auto Test Status][travis-image]][travis-url] [![license][license-image]][license-url] [![Gitter chat][gitter-image]][gitter-url]
 
+[Check out the demo video](https://youtu.be/kYFz03Cg3-A)
+
 Genetics, aka genes, are the code of life.  Evolution is the process by which improvement is made to the genes of a population by iteratively removing less fit members of a population then replacing them with clones, mutants, and crossovers of the remaining population.  Applied in nature this accounts for all of animal and plant diversity.  Applied in a controlled way different animal and plant populations have been changed by humans to be stronger, faster, calmer, juicer, and better milk producers (just to name a few).
 
 Genetic Algorithms are an attempt to mimic the benefits of Evolution.  This package provides the calculation framework to execute and mimic artificial evolution.  Genetic Algorithms have been used to solve many problems in Engineering and Mathmatics both for fun and profit.
