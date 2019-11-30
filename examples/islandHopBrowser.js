@@ -59,11 +59,7 @@ function doesABeatBFunction(a,b) {
 }
 
 
-let ga = geneticAlgorithmConstructor({
-        population: [ 
-            { x: .3 , y: .5 } 
-        ]
-    });
+let ga = 0;
 
 
 function basic_ga() {
@@ -71,7 +67,7 @@ function basic_ga() {
         mutationFunction: mutationFunction,
         crossoverFunction: crossoverFunction,
         fitnessFunction: fitnessFunction,
-        population: ga.population(),
+        population: !ga?[ { x: .3 , y: .5 } ]:ga.population(),
         populationSize: 500
     });
 }
@@ -122,12 +118,14 @@ function draw() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fill();
 
-    for(island of islands) {
-        drawIsland(island[0],island[1])
-    }
+    if (ga) {
+        for(island of islands) {
+            drawIsland(island[0],island[1])
+        }
 
-    for(frog of ga.population()) {
-        drawFrog(frog.x,frog.y)
+        for(frog of ga.population()) {
+            drawFrog(frog.x,frog.y)
+        }
     }
     window.requestAnimationFrame(draw);
 }

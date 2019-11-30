@@ -8,7 +8,7 @@ A naive implementation will try and maximize a fitness function by applying muta
 
 To add diversity use the [doesABeatBFunction](#doesABeatBFunction) function instead of the [fitnessFunction](#fitnessFunction) and only allow A to beat B if A is more fit than B and B is close enough.  See the [Islands](#Islands) example for sample code.
 
-Section Links : [Construction](#construction) , [Execution](#execution) , [Examples](#example) , [Phenotype](#phenotype) , [FAQ](#faq) , [Related](#related-ai-projects) , and [References](#references)
+Section Links : [Construction](#construction) , [Execution](#execution) , [Examples](#examples) , [Phenotype](#phenotype) , [FAQ](#faq) , [Related](#related-ai-projects) , and [References](#references)
 
 # Construction
 ### GeneticAlgorithm constructor
@@ -185,7 +185,7 @@ function doesABeatBFunction(phenoTypeA, phenoTypeB) {
 ```
 
 
-# Example
+# Examples
 If you have installed this as a npm dependency first change directory to *node_modules/geneticalgorithm/*.
 
 ### Template
@@ -209,7 +209,7 @@ Then go to (/examples/islandHop.html)[http://localhost:8000/examples/islandHop.h
 ### Traveling Salesmen
 For a list of XY coordinates, find the order that results in the least distance being traveled.  Run the example like so:
 ```
-node example/travelingSalesmen.js
+node examples/travelingSalesmen.js
 ```
 
 
@@ -218,10 +218,10 @@ Execute the *Fixed Number Array* example.  This example shows how to use the bas
 
 ```
 # use the default of 10 numbers in the number array
-node example/fixedNumberArray.js
+node examples/fixedNumberArray.js
 
 # change the array to be 30 numbers long
-node example/fixedNumberArray.js 30
+node examples/fixedNumberArray.js 30
 ```
 
 ### Variable Number Array
