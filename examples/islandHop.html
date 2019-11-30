@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Island Hop</title>
+    </head>
+    <style>
+        body {
+            margin: 10px;
+            background-color: #ddd;
+            color: black;
+        }
+        canvas {
+            background-color: white;
+            display: inline-block;
+        }
+        div {
+            display: inline-block;
+            height: 610px;
+            vertical-align: top;
+            margin: 10px;
+        }
+        div.side {
+            width:200px;
+        }
+        button {
+            display: block;
+        }
+    </style>
+    <body>
+        <h1>Island Hop</h1>
+        <div><canvas id="canvas" width="600px" height="600px">what, no canvas?  Yo browsa suks!</canvas></div>
+        <div class="side">
+            <p>The objective is for the frogs to evolve to the island with the highest score.</p><p>
+                The islands are to be though of as genetic attributes, not physical islands.</p><p>
+                The X axis represents one attribute and the Y axis another.</p><p>
+                Having both doesn't work until they are both really developed.</p><p>
+                See how basic vs diversity genetic algorithms do.
+            </p>
+            <button onclick="basic_ga()">Basic GA</button>
+            <button onclick="diversity_ga()">With Diversity</button>
+            <button onclick="doSimulation=true">Start Simulation</button>
+            <button onclick="doSimulation=false">Stop Simulation</button>
+            <p>Number of frogs that made it </p>
+            <p id="madeit">0</p>
+        </div>
+
+        <script>
+            let module = {};
+        </script>
+        <script src="/index.js"></script>
+        <script>
+            let geneticAlgorithmConstructor = module.exports;
+        </script>
+        <script src="islandHopBrowser.js"></script>
+    </body>
+</html>

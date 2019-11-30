@@ -194,6 +194,18 @@ The template is a boiler plate of how to get started.  It has a dummy phenotype 
 node examples/template.js 
 ```
 
+### Islands
+One issue that arrises is when there are local maxima and the genetic algorithm gets stuck on it and does not explore and find the global maxima.  In this example there are 25 local maxima but only one global maxima.  One phenotype starts near the worst local maxima and after a few generations the genetic algorithm is able to find the global maxima.
+
+The command line example.
+```
+node examples/islandHop.js
+```
+
+There is also a web example.  Use something like `http-server -p 8000` or another web server.
+Then go to (/examples/islandHop.html)[http://localhost:8000/examples/islandHop.html]
+
+
 ### Traveling Salesmen
 For a list of XY coordinates, find the order that results in the least distance being traveled.  Run the example like so:
 ```
@@ -220,12 +232,6 @@ node examples/variableNumberArray.js
 
 # use 15 as the target length
 node examples/variableNumberArray.js 15
-```
-
-### Islands
-One issue that arrises is when there are local maxima and the genetic algorithm gets stuck on it and does not explore and find the global maxima.  In this example there are 25 local maxima but only one global maxima.  One phenotype starts near the worst local maxima and after a few generations the genetic algorithm is able to find the global maxima.
-```
-node examples/islandHop.js
 ```
 
 # Phenotype
