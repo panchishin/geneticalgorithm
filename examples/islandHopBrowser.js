@@ -13,14 +13,86 @@ let islands = [[0.5,0.5],                                // upper left
 Math.sqr = function(x) { return Math.pow(x,2) }
 function cloneJSON( item ) { return JSON.parse ( JSON.stringify ( item ) ) }
 
+
+
+
+// ********************** GENETIC ALGO FUNCTIONS *************************
+
+
+function mutationFunction(phenotype) {
+    phenotype.x += 3*(Math.random()*2 - 1)*(Math.random()*2 - 1)*(Math.random()*2 - 1);
+    phenotype.y += 3*(Math.random()*2 - 1)*(Math.random()*2 - 1)*(Math.random()*2 - 1);
+    return phenotype;
+}
+
+function crossoverFunction(a, b) {
+    let x = cloneJSON(a)
+    let y = cloneJSON(b)
+    x.x = b.x;
+    y.y = a.y;
+    return Math.random() < .5 ? [x,y] : [y,x];
+}
+
 function positionScore(x,y){
     return islands.map(function(island) {
         let islandValue = island[0]/2.+island[1]
         let distance = Math.sqrt( (Math.sqr(x - island[0]) + Math.sqr(y - island[1])) / 2 )
         if (distance > .4) { return -10 }
-        return (distance + 1) * islandValue
-    }).reduce(function(a,b) { return Math.max(a,b) })
+        return Math.min(.4,.5 - distance) * islandValue
+    }).reduce(function(a,b) { return Math.max(a,b) })*10
 }
+
+function fitnessFunction(phenotype) {
+    return positionScore(phenotype.x,phenotype.y)
+}
+
+function doesABeatBFunction(a,b) {
+    let aScore = fitnessFunction(a)
+    let bScore = fitnessFunction(b)
+    let distance = Math.sqrt(Math.sqr(a.x - b.x) + Math.sqr(a.y - b.y))
+
+    if ((aScore >= 0)&&(bScore < 0)) return aScore
+    if (aScore < 0) return 0
+    if (distance > 2 && Math.random() > .1/distance ) return 0
+
+    return aScore - bScore
+}
+
+
+let ga = geneticAlgorithmConstructor({
+        population: [ 
+            { x: .3 , y: .5 } 
+        ]
+    });
+
+
+function basic_ga() {
+    ga = geneticAlgorithmConstructor({
+        mutationFunction: mutationFunction,
+        crossoverFunction: crossoverFunction,
+        fitnessFunction: fitnessFunction,
+        population: ga.population(),
+        populationSize: 500
+    });
+}
+
+function diversity_ga() {
+    ga = ga.clone({
+        doesABeatBFunction: doesABeatBFunction
+    });
+}
+
+function reset_population() {
+    ga = ga.clone({
+        population: [ { x: .3 , y: .5 } ]
+    });
+}
+
+
+
+
+// ********************** UI STUFF *************************
+
 
 function drawCircle(x,y,s,color) {
     context.fillStyle = "hsla("+color+",90%,40%,1)";
@@ -33,10 +105,10 @@ function drawCircle(x,y,s,color) {
 
 function drawIsland(x,y) {
     drawCircle(x,y,.4,90)
+    drawCircle(x,y,.1,90)
     context.fillStyle = "hsla(0,0%,0%,1)";
     context.strokeStyle = "hsla(0,0%,0%,1)";
-    context.moveTo(x*MAX_SIZE/10., y*MAX_SIZE/10.);
-    context.fillText(Math.round(10*positionScore(x,y)),x*MAX_SIZE/10., y*MAX_SIZE/10.);
+    context.fillText(Math.round(positionScore(x,y)),x*MAX_SIZE/10.-5, y*MAX_SIZE/10.-10);
 }
 
 function drawFrog(x,y) { 
@@ -55,57 +127,12 @@ function draw() {
     }
 
     for(frog of ga.population()) {
-        drawFrog(frog.pos[0],frog.pos[1])
+        drawFrog(frog.x,frog.y)
     }
     window.requestAnimationFrame(draw);
 }
 
-window.onload = function() { window.requestAnimationFrame(draw); }
-
-
-
-
-
-
-function mutationFunction(phenotype) {
-    phenotype.pos[0] += 3*(Math.random()*2 - 1)*(Math.random()*2 - 1)*(Math.random()*2 - 1);
-    phenotype.pos[1] += 3*(Math.random()*2 - 1)*(Math.random()*2 - 1)*(Math.random()*2 - 1);
-    return phenotype;
-}
-
-function crossoverFunction(a, b) {
-    let x = cloneJSON(a)
-    let y = cloneJSON(b)
-    x.pos[0] = b.pos[0];
-    y.pos[1] = a.pos[1];
-    return Math.random() < .5 ? [x,y] : [y,x];
-}
-
-
-function fitnessFunction(phenotype) {
-    return positionScore(phenotype.pos[0],phenotype.pos[1])
-}
-
-function doesABeatBFunction(a,b) {
-    let aScore = fitnessFunction(a)
-    let bScore = fitnessFunction(b)
-    let distance = Math.sqrt(Math.sqr(a.pos[0] - b.pos[0]) + Math.sqr(a.pos[1] - b.pos[1]))
-
-    if ((aScore >= 0)&&(bScore < 0)) return aScore
-    if ((aScore < 0)&&(bScore < 0)) return 1
-    if (distance > 2 && Math.random() > .1/distance ) return 0
-
-    return aScore - bScore
-}
-
-function createEmptyPhenotype() {
-    return { pos : [ .3 , .5 ] }
-}
-
-
-function finished() {
-    return Math.round(ga.best().pos[0] * 10) == 85 && Math.round(ga.best().pos[1] * 10) == 85 
-}
+window.onload = function() { basic_ga(); window.requestAnimationFrame(draw); }
 
 var doSimulation = false
 
@@ -113,40 +140,8 @@ setInterval(function(){
     if (doSimulation) {
         for(let x=0 ; x<10; x++) ga.evolve()
         madeit.innerText = ga.population().map(function(p){
-            return Math.abs(p.pos[0]-8.5) < 1 && Math.abs(p.pos[1]-8.5) < 1 ? 1 : 0
+            return Math.abs(p.x-8.5) < 1 && Math.abs(p.y-8.5) < 1 ? 1 : 0
         }).reduce(function(a,b){ return a+b }) + " of " + ga.population().length
     }
 },50)
 
-
-let ga = geneticAlgorithmConstructor({
-        mutationFunction: mutationFunction,
-        crossoverFunction: crossoverFunction,
-        fitnessFunction: fitnessFunction,
-        //doesABeatBFunction: doesABeatBFunction,
-        population: [ createEmptyPhenotype() ],
-        populationSize: 500
-    });
-
-
-function basic_ga() {
-    ga = geneticAlgorithmConstructor({
-        mutationFunction: mutationFunction,
-        crossoverFunction: crossoverFunction,
-        fitnessFunction: fitnessFunction,
-        //doesABeatBFunction: doesABeatBFunction,
-        population: [ createEmptyPhenotype() ],
-        populationSize: 500
-    });
-}
-
-function diversity_ga() {
-    ga = geneticAlgorithmConstructor({
-        mutationFunction: mutationFunction,
-        crossoverFunction: crossoverFunction,
-        // fitnessFunction: fitnessFunction,
-        doesABeatBFunction: doesABeatBFunction,
-        population: [ createEmptyPhenotype() ],
-        populationSize: 500
-    });
-}
