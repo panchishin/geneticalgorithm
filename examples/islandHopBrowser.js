@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const madeit = document.getElementById("madeit");
 const context = canvas.getContext('2d');
 
-MAX_SIZE = 1000;
+MAX_SIZE = 600;
 
 let islands = [[0.5,0.5],                                // upper left
                [2.5,0.5],[4.5,0.5],[6.5,0.5],[8.5,0.5],  // x column 
