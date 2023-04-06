@@ -98,6 +98,33 @@ module.exports = {
         assert.equal( true , ga.bestScore() > 1 , "Error : untrue : " + ga.bestScore() + " > 1");
 
 
-    }
+    },
+    'custom randomFunction works': function (beforeExit, assert) {
+      let customRandomCalled = false;
+      const customRandomFunction = () => {
+        customRandomCalled = true;
+        return Math.random();
+      };
+
+      var config = {
+        mutationFunction: function (phenotype) {
+          return phenotype;
+        },
+        crossoverFunction: function (a, b) {
+          return [a, b];
+        },
+        fitnessFunction: function (phenotype) {
+          return 0;
+        },
+        population: [{ name: "alice" }],
+        randomFunction: customRandomFunction,
+      };
+
+      var geneticalgorithm = geneticAlgorithmConstructor(config);
+
+      geneticalgorithm.evolve();
+      assert.equal(true, customRandomCalled, "customRandomFunction was not called");
+    },
+
 }
 

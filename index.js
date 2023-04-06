@@ -10,6 +10,8 @@ module.exports = function geneticAlgorithmConstructor(options) {
 
         doesABeatBFunction : undefined,
  
+        randomFunction : function() { return Math.random() },
+
         population : [],
         populationSize : 100,
     }}
@@ -22,6 +24,8 @@ module.exports = function geneticAlgorithmConstructor(options) {
         settings.fitnessFunction = settings.fitnessFunction || defaults.fitnessFunction
 
         settings.doesABeatBFunction = settings.doesABeatBFunction || defaults.doesABeatBFunction
+
+        settings.randomFunction = settings.randomFunction || defaults.randomFunction
 
         settings.population = settings.population || defaults.population
         if ( settings.population.length <= 0 ) throw Error("population must be an array and contain at least 1 phenotypes")
@@ -39,7 +43,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
         while( settings.population.length < settings.populationSize ) {
             settings.population.push(
                 mutate(
-                    cloneJSON( settings.population[ Math.floor( Math.random() * size ) ] )
+                    cloneJSON( settings.population[ Math.floor( settings.randomFunction() * size ) ] )
                 )
             )
         }
@@ -55,7 +59,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
 
     function crossover(phenotype) {
         phenotype = cloneJSON(phenotype)
-        var mate = settings.population[ Math.floor(Math.random() * settings.population.length ) ]
+        var mate = settings.population[ Math.floor(settings.randomFunction() * settings.population.length ) ]
         mate = cloneJSON(mate)
         return settings.crossoverFunction(phenotype,mate)[0]
     }
@@ -78,7 +82,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
 
             nextGeneration.push(phenotype)
             if ( doesABeatB( phenotype , competitor )) {
-                if ( Math.random() < 0.5 ) {
+                if ( settings.randomFunction() < 0.5 ) {
                     nextGeneration.push(mutate(phenotype))
                 } else {
                     nextGeneration.push(crossover(phenotype))
@@ -96,7 +100,7 @@ module.exports = function geneticAlgorithmConstructor(options) {
     function randomizePopulationOrder( ) {
 
         for( var index = 0 ; index < settings.population.length ; index++ ) {
-            var otherIndex = Math.floor( Math.random() * settings.population.length )
+            var otherIndex = Math.floor( settings.randomFunction() * settings.population.length )
             var temp = settings.population[otherIndex]
             settings.population[otherIndex] = settings.population[index]
             settings.population[index] = temp
